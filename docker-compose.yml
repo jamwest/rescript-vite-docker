@@ -1,0 +1,16 @@
+# docker-compose.yml
+
+services:
+  app:
+    network_mode: host
+    build:
+      context: ./app
+      args:
+        DIR_PATH: ${PWD}/app
+    volumes:
+      - ./app/lib:${PWD}/app/lib
+      - ./app/public:${PWD}/app/public
+      - ./app/src:${PWD}/app/src
+      - type: bind
+        source: ./app/index.html
+        target: ${PWD}/app/index.html
