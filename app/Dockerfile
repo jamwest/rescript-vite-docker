@@ -13,6 +13,6 @@ ARG DIR_PATH
 
 WORKDIR ${DIR_PATH}
 COPY --from=builder /opt/node_modules ./node_modules
-COPY bsconfig.json package.json package-lock.json vite.config.js index.html ./
+COPY bsconfig.json package.json package-lock.json vite.config.js ./
 
 CMD ["npm", "run", "--silent", "docker-stage-1"]
