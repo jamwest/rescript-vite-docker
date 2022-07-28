@@ -5,11 +5,14 @@
   "scripts": {
     "re": "rescript build -with-deps",
     "re:watch": "rescript build -with-deps -w < /dev/zero",
-    "re:clean": "sudo chown -R $USER ./lib && rescript clean",
+    "re:clean": "rescript clean",
+    "fullclean": "sudo chown -R $USER ./lib && rescript clean",
     "build": "npm run re:clean && npm run re && NODE_ENV=production vite build",
+    "buildwatch": "NODE_ENV=production vite build --watch",
     "vite:server": "vite",
-    "docker-stage-1": "npm run --silent re && npm run --silent docker-stage-2",
-    "docker-stage-2": "npm run --silent re:watch & npm run --silent vite:server"
+    "docker-stage-1": "npm run --silent re && rm -f .bsb.lock && npm run --silent docker-stage-2",
+    "docker-stage-2": "npm run --silent re:watch & npm run --silent vite:server & npm run --silent docker-stage-3",
+    "docker-stage-3": "npm run --silent buildwatch"
   },
   "license": "Unlicense",
   "dependencies": {
@@ -21,3 +24,4 @@
     "vite": "^2.9.13"
   }
 }
+
